@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mystore/routes/routes.dart';
+import 'package:mystore/view/screens/welcome_screen.dart';
+import 'package:get/get.dart';
 
 void main() => runApp(MyApp());
 
@@ -6,7 +9,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       // Application name
       title: 'Flutter Hello World',
       // Application theme data, you can set the colors for the application as
@@ -14,28 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // A widget which will be started on application startup
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        // The title text which will be shown on the action bar
-        title: Text(title),
-      ),
-      body: Center(
-        child: Text(
-          'Hello, World!',
-        ),
-      ),
+      initialRoute: RoutesName.welcomescreen,
+      getPages: Routes.routes,
     );
   }
 }
