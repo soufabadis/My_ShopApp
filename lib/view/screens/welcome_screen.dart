@@ -81,7 +81,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.toNamed(RoutesName.signup);
+                    Get.offNamed(RoutesName.signup);
                   },
                   child: MyText(
                     color: Colors.white.withOpacity(0.8),
