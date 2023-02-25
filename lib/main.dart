@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  Routes routes = Routes();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       initialRoute: RoutesName.welcomescreen,
-      getPages: Routes.routes,
+      getPages: routes.routes,
     );
   }
 }

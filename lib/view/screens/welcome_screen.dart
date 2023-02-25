@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mystore/routes/routes.dart';
 import 'package:mystore/utils/theme.dart';
+import 'package:mystore/view/widgets/Circle_avatar.dart';
 import 'package:mystore/view/widgets/my_text.dart';
 import 'package:get/get.dart';
 
@@ -66,12 +66,14 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: mainColor,
+                      minimumSize: Size(50, 60),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                   ),
                 ),
+                SizedBox(height: 12),
                 MyText(
                   color: Colors.white.withOpacity(0.8),
                   text: "Don't have an account ?",
@@ -91,6 +93,8 @@ class WelcomeScreen extends StatelessWidget {
                     decoration: TextDecoration.underline,
                   ),
                 ),
+                MyCircleAvatar(
+                    circleraduis: 50, imagename: 'lib/images/google.jpg"'),
               ]),
         ],
       ),
