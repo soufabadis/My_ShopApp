@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mystore/logic/controller/auth_controller.dart';
 import 'package:mystore/routes/routes.dart';
 import 'package:mystore/utils/theme.dart';
@@ -133,7 +132,21 @@ class SignupScreen extends StatelessWidget {
                 text2: 'sign in',
                 text1: 'Already have an account ?',
                 onpressed: () {
-                  Get.offNamed(RoutesName.login);
+                  if (AuthController.ischecked == false) {
+                    Get.snackbar(
+                        'ERREUR', "please accecpt terme and conditionbadus",
+                        snackPosition: SnackPosition.BOTTOM,
+                        duration: Duration(seconds: 4),
+                        backgroundColor: Colors.red[800],
+                        colorText: Colors.white);
+                  }
+
+                  if (authkey.currentState!.validate()) {
+                    authcontroller.firebaseregistration(
+                        emailcontroller!.text.trim(),
+                        passwordcontroller!.text,
+                        usercontroller!.text.trim());
+                  }
                 }),
           ])),
         ),

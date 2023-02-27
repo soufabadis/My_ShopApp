@@ -93,8 +93,6 @@ class WelcomeScreen extends StatelessWidget {
                     decoration: TextDecoration.underline,
                   ),
                 ),
-                MyCircleAvatar(
-                    circleraduis: 50, imagename: 'lib/images/google.jpg"'),
               ]),
         ],
       ),

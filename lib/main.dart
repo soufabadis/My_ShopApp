@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mystore/routes/routes.dart';
-import 'package:mystore/view/screens/welcome_screen.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   Routes routes = Routes();
