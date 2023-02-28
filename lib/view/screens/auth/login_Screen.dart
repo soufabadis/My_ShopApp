@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mystore/logic/controller/auth_controller.dart';
 import 'package:mystore/routes/routes.dart';
 import 'package:mystore/utils/theme.dart';
 import 'package:mystore/view/widgets/Circle_avatar.dart';
 import 'package:mystore/view/widgets/auth_container.dart';
-import 'package:mystore/view/widgets/checking_box.dart';
 import 'package:mystore/view/widgets/my_text.dart';
 import 'package:mystore/view/widgets/my_theme_text_form_field.dart';
 import 'package:get/get.dart';
@@ -124,23 +122,31 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 14),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: MyText(
-                            color: Colors.white,
-                            text: 'Sign In ',
-                            fontsize: 18,
-                            fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.none,
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Get.isDarkMode ? mainColor : pinkClr,
-                            minimumSize: const Size(70, 70),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                        GetBuilder<AuthController>(
+                          builder: (_) => ElevatedButton(
+                            onPressed: () {
+                              if (authkey.currentState!.validate()) {
+                                authcontroller.firebasesignin(
+                                    emailcontroller!.text.trim(),
+                                    passwordcontroller!.text);
+                              }
+                            },
+                            child: MyText(
+                              color: Colors.white,
+                              text: 'Sign In ',
+                              fontsize: 18,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.none,
                             ),
-                            shadowColor: Colors.lightGreen,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  Get.isDarkMode ? mainColor : pinkClr,
+                              minimumSize: const Size(70, 70),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              shadowColor: Colors.lightGreen,
+                            ),
                           ),
                         ),
                         SizedBox(height: 27),

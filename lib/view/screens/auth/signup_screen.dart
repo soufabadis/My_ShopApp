@@ -8,6 +8,7 @@ import 'package:mystore/view/widgets/my_text.dart';
 import 'package:mystore/view/widgets/my_theme_text_form_field.dart';
 import 'package:get/get.dart';
 import 'package:mystore/utils/my_string.dart';
+import 'package:mystore/view/widgets/myelevated_button.dart';
 
 class SignupScreen extends StatelessWidget {
   TextEditingController? usercontroller = TextEditingController();
@@ -123,8 +124,27 @@ class SignupScreen extends StatelessWidget {
                               onPressed: () => authcontroller.ishidingicon()),
                         ),
                       ),
-                      SizedBox(height: 18),
                       MyCheckingBox(),
+                      SizedBox(height: 18),
+                      GetBuilder<AuthController>(
+                        builder: (_) => MyElevatedButton(
+                          onpressed: () {
+                            if (AuthController.ischecked.value == false) {
+                              Get.snackbar('ERREUR',
+                                  "Please accecpt terme and condition ",
+                                  snackPosition: SnackPosition.BOTTOM,
+                                  duration: Duration(seconds: 4),
+                                  backgroundColor: Colors.red[800],
+                                  colorText: Colors.white);
+                            } else if (authkey.currentState!.validate()) {
+                              authcontroller.firebaseregistration(
+                                  emailcontroller!.text.trim(),
+                                  passwordcontroller!.text,
+                                  usercontroller!.text.trim());
+                            }
+                          },
+                        ),
+                      )
                     ]),
               ),
             ),
@@ -132,22 +152,8 @@ class SignupScreen extends StatelessWidget {
                 text2: 'sign in',
                 text1: 'Already have an account ?',
                 onpressed: () {
-                  if (AuthController.ischecked == false) {
-                    Get.snackbar(
-                        'ERREUR', "please accecpt terme and conditionbadus",
-                        snackPosition: SnackPosition.BOTTOM,
-                        duration: Duration(seconds: 4),
-                        backgroundColor: Colors.red[800],
-                        colorText: Colors.white);
-                  }
-
-                  if (authkey.currentState!.validate()) {
-                    authcontroller.firebaseregistration(
-                        emailcontroller!.text.trim(),
-                        passwordcontroller!.text,
-                        usercontroller!.text.trim());
-                  }
-                }),
+                  Get.offNamed(RoutesName.login);
+                })
           ])),
         ),
       ),

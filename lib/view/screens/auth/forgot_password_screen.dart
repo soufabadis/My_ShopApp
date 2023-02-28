@@ -9,8 +9,8 @@ import 'package:mystore/utils/my_string.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   TextEditingController? emailcontroller = TextEditingController();
-  final GlobalKey<FormState> authkey = GlobalKey();
-  AuthController authcontroller = AuthController();
+  final GlobalKey<FormState> _authkey = GlobalKey();
+  AuthController authcontroller = Get.find<AuthController>();
   ForgotPasswordScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class ForgotPasswordScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Form(
-            key: authkey,
+            key: _authkey,
             child: Column(children: [
               Container(
                 width: double.infinity,
@@ -95,7 +95,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 17),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (_authkey.currentState!.validate()) {
+                              authcontroller
+                                  .resetpassword(emailcontroller!.text.trim());
+                            }
+                          },
                           child: MyText(
                             color: Colors.white,
                             text: 'Send ',

@@ -56,24 +56,6 @@ class MyCheckingBox extends StatelessWidget {
           ],
         ),
         SizedBox(height: 13),
-        ElevatedButton(
-          onPressed: () {},
-          child: MyText(
-            color: Colors.white,
-            text: 'Sign Up ',
-            fontsize: 18,
-            fontWeight: FontWeight.bold,
-            decoration: TextDecoration.none,
-          ),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Get.isDarkMode ? mainColor : pinkClr,
-            minimumSize: const Size(70, 70),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            shadowColor: Colors.lightGreen,
-          ),
-        ),
       ],
     );
   }
