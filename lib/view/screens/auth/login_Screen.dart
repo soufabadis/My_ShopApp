@@ -14,7 +14,7 @@ class LoginScreen extends StatelessWidget {
   TextEditingController? emailcontroller = TextEditingController();
   TextEditingController? passwordcontroller = TextEditingController();
   final GlobalKey<FormState> authkey = GlobalKey();
-  AuthController authcontroller = AuthController();
+  AuthController authcontroller = Get.find<AuthController>();
   LoginScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -153,11 +153,15 @@ class LoginScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            InkWell(
-                              onTap: () {},
-                              child: MyCircleAvatar(
-                                  circleraduis: 25,
-                                  imagename: "lib/images/google.png"),
+                            GetBuilder<AuthController>(
+                              builder: (_) => InkWell(
+                                onTap: () {
+                                  authcontroller.googleSignIn;
+                                },
+                                child: MyCircleAvatar(
+                                    circleraduis: 25,
+                                    imagename: "lib/images/google.png"),
+                              ),
                             ),
                             SizedBox(width: 18),
                             InkWell(

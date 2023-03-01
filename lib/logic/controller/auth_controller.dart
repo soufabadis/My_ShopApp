@@ -10,6 +10,7 @@ class AuthController extends GetxController {
   static RxBool ishiding = true.obs; // hiding password icon initial value
 
   final GoogleSignIn googleSignIn = GoogleSignIn(); // google signin
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String displayUserName = "";
   String displayUserphoto = "";
 
@@ -26,11 +27,11 @@ class AuthController extends GetxController {
       String email, String password, String username) async {
     try {
       UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      await FirebaseAuth.instance.currentUser!.updateDisplayName(username);
+      await firebaseAuth.currentUser!.updateDisplayName(username);
 
       // Add this line to update the user's display name in Firebase
     } on FirebaseAuthException catch (erreur) {
@@ -64,7 +65,7 @@ class AuthController extends GetxController {
   Future<void> firebasesignin(String email, String password) async {
     try {
       UserCredential userCredential =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
+          await firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -93,7 +94,7 @@ class AuthController extends GetxController {
   Future<void> resetpassword(String email) async {
     try {
       List<String> signInMethods =
-          await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
+          await firebaseAuth.fetchSignInMethodsForEmail(email);
       if (signInMethods.isEmpty) {
         Get.snackbar("erreur", 'the is no account found please subscribe',
             snackPosition: SnackPosition.BOTTOM,
@@ -101,7 +102,7 @@ class AuthController extends GetxController {
             backgroundColor: Colors.red[800],
             colorText: Colors.white);
       } else {
-        await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+        await firebaseAuth.sendPasswordResetEmail(email: email);
         Get.snackbar("Reset email", "Please check you email ",
             snackPosition: SnackPosition.BOTTOM,
             duration: Duration(seconds: 4),
@@ -138,6 +139,7 @@ class AuthController extends GetxController {
         await FirebaseAuth.instance.signInWithCredential(credential);
 
         displayUserName = googleSignInAccount.displayName!;
+        displayUserphoto = googleSignInAccount.photoUrl!;
 
         update();
       }
